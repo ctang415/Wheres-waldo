@@ -12,9 +12,15 @@ import { useNavigate } from "react-router-dom";
 const App = () => {
 
   const navigate = useNavigate();
+
   const startClickHandler = (e) => {
     navigate('/game')
     setGameStatus(true)
+  }
+
+  const homeClickHandler = (e) => {
+    navigate('/')
+    setGameStatus(false)
   }
 
   const [ gameStatus, setGameStatus] = useState(false)
@@ -26,15 +32,16 @@ const App = () => {
     console.log(docRef.id)
   }
 
-
   return (
-    <div>
-      <Header gameStatus={gameStatus} />
+    <div className='page'>
+      <div className="content-wrapper">
+      <Header homeClickHandler={homeClickHandler}  gameStatus={gameStatus} />
       <Routes>
         <Route path="/" exact element={<Home startClickHandler={startClickHandler} />} />
         <Route path="/game" element={<Game setGameStatus={setGameStatus} />} />
         <Route path="/scoreboard" element={<Scoreboard/>} />
       </Routes>
+      </div>
     </div>
   );
 }
