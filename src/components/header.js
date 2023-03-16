@@ -1,19 +1,20 @@
 import React from "react"
+import { Link } from "react-router-dom"
 import { Icon, HomeIcon } from "../assets"
 
-const Header = ({gameStatus, homeClickHandler, listOfCharacters}) => {
-    if (gameStatus === true) {
+const Header = ({location, listOfCharacters}) => {
+    if (location.pathname.includes('game')) {
         return (
             <div className="header-true">
                 <ul>
                 {listOfCharacters.map(character => {
                     return (
-                        <li key={character}><img src={character}></img></li>
+                        <li key={character}><img src={character} alt="Waldo character"></img></li>
                     )
                 })}
                 </ul>
                 <span>Timer:</span>
-                    <img id="header-true-icon" src={HomeIcon} alt="Home Icon" onClick={homeClickHandler}></img>
+                    <Link to="/"><img id="header-true-icon" src={HomeIcon} alt="Home Icon"></img></Link>
             </div>
         )
     } else

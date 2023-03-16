@@ -23,7 +23,7 @@ const Photo = ({listOfCharacters, setBox, box}) => {
                 )
             })}
             <div className="photo-div">
-                <img id="photo-image-search" src={PictureOne}></img>
+                <img id="photo-image-search" src={PictureOne} alt="Find Waldo"></img>
             </div>
         </div>
     )
