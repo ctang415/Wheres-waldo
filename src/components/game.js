@@ -1,10 +1,12 @@
+import React from "react"
 import Photo from "./photo"
 
-const Game = () => {
+
+const Game = ({listOfCharacters, setBox, box}) => {
     return (
-        <div>
+        <div className="game">
             Game
-            <Photo/>
+            <Photo listOfCharacters={listOfCharacters} box={box} setBox={setBox}/>
         </div>
     )
 }

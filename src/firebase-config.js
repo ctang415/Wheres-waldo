@@ -1,6 +1,7 @@
 // Your web app's Firebase configuration
 import { initializeApp } from "firebase/app";
 import { getFirestore } from 'firebase/firestore'
+import { PictureOne } from "./assets";
 
 const config = {
   apiKey: "AIzaSyDKUDbmb7XTEWy6kqMPCq8DNoeEBJc6WIU",
