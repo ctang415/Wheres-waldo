@@ -13,24 +13,17 @@ body {
     flex-direction: column;
     align-items: center;
     font-size: 2em;
-    padding: 2em;
     background: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,.2)), url('./assets/example.jpg');
     background-size: cover;
     background-repeat:no-repeat; 
     height: 100vh;
+    justify-content: space-evenly;
 }
 
 .home-text {
     font-weight: bold;
     text-align: center;
-}
-
-.buttons {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4.5vw;
-    padding: 2em;
+    white-space: pre-line;
 }
 
 .button {
@@ -128,18 +121,33 @@ li > img {
 .home-levels {
     display: flex;
     flex-direction: row;
-    cursor: pointer;
     text-align: center;
+    gap: 5vh;
+}
+
+.home-level {
+    display: flex;
+    flex-direction: column;
 }
 
 .home-level-images {
+    flex: 1 1 auto; 
+    width: 55vh;
 }
 
 .home-level-image {
     width: 100%;
-
+    height: 100%;
+    object-fit: cover;
 }
 
 .home-level-text {
     color: black;
+    background-color: white;
 }
+
+a:-webkit-any-link {
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+  }
