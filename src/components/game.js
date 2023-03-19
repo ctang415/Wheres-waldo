@@ -1,9 +1,8 @@
 import Characters from "./characters"
-import { PictureOne, PictureTwo, PictureThree } from "../assets"
 import React, { useState, useEffect } from "react"
 import { useParams } from "react-router-dom";
 import { db } from "../firebase-config";
-import { doc, setDoc, getDocs, getDoc, addDoc, collection, query, where } from 'firebase/firestore'
+import { getDocs, collection, query, where } from 'firebase/firestore'
 
 const Game = ({setGameOver, listOfCharacters, setBox, box}) => {
     const  matchId  = useParams()

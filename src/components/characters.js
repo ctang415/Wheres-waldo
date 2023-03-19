@@ -8,7 +8,7 @@ const Characters = ({ gameData, setBox, box }) => {
                 item.characters.map((person) => {
                     return (
                 <div className="characters-div" key={person.character}>
-                    <img className="characters-image" src={person.image}></img>
+                    <img className="characters-image" src={person.image} alt="Waldo character"></img>
                 </div>
                     )
                 })
