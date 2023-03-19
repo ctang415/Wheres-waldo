@@ -1,6 +1,6 @@
 import { doc, setDoc, getDocs, getDoc, addDoc, collection, query, where } from 'firebase/firestore'
 import React, { useEffect, useState } from 'react';
-import { Routes, Route, useLocation } from 'react-router';
+import { Routes, Route, useLocation, useParams } from 'react-router';
 import Game from './game';
 import Header from './header';
 import Home from './home';
@@ -25,17 +25,17 @@ const App = () => {
   console.log(doc.id, " => ", doc.data());
 });
   }
-
-  useEffect(() => getQuery, [])
-  useEffect(() => console.log(gameData), [getQuery])
+  const {id} = useParams()
+  useEffect(() => {getQuery()}, [])
+  useEffect(() => {console.log(gameData)}, [])
 
   return (
     <div className="page">
       <div className="content-wrapper">
-      <Header location={location} gameData={gameData} listOfCharacters={listOfCharacters} />
+      <Header location={location} listOfCharacters={listOfCharacters} />
       <Routes>
         <Route path="/" exact element={<Home gameData={gameData} />} />
-        <Route path="/:id" element={<Game gameData={gameData} setGameOver={setGameOver} listOfCharacters={listOfCharacters} box={box} setBox={setBox} />} />
+        <Route path="/game/:id" element={<Game setGameOver={setGameOver} listOfCharacters={listOfCharacters} box={box} setBox={setBox} />} />
         <Route path="/scoreboard" element={<Scoreboard/>} />
       </Routes>
       </div>

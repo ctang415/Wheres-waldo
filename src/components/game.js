@@ -1,12 +1,24 @@
 import Characters from "./characters"
 import { PictureOne, PictureTwo, PictureThree } from "../assets"
-import React, { useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import { useParams } from "react-router-dom";
+import { db } from "../firebase-config";
+import { doc, setDoc, getDocs, getDoc, addDoc, collection, query, where } from 'firebase/firestore'
 
-const Game = ({setGameOver, gameData, listOfCharacters, setBox, box}) => {
+const Game = ({setGameOver, listOfCharacters, setBox, box}) => {
     const  matchId  = useParams()
+    const [ gameData, setGameData ] = useState([])
 
-    const myGame = gameData.find(item => item.name === matchId.id) 
+    const getQuery = async () => {
+        const q = query(collection(db, "levels"), where('name', '==', `${matchId.id}`))
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+          setGameData(gameData => [...gameData, doc.data()])
+        }); 
+      };
+      useEffect(() => {
+        getQuery(); console.log(gameData)
+    }, [])  
 
     const pushToArray = (e) => {
         if (e.target.id === 'photo-image-search') {
@@ -26,10 +38,13 @@ const Game = ({setGameOver, gameData, listOfCharacters, setBox, box}) => {
                 <div key={item} className="characters" style={{ left: item.left, top: item.top }}><Characters listOfCharacters={listOfCharacters}/></div>
                 )
             })}
-            <div className="photo-div">
-                <img id="photo-image-search" src={myGame.url} alt="Find Waldo"></img>
+            {gameData.map(item => {
+                return (
+            <div key={item.name} className="photo-div">
+                <img id="photo-image-search" src={item.url} alt="Find Waldo"></img>
             </div>
-
+                )
+            })}
         </div>
     )
 }

@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 import { Icon, HomeIcon } from "../assets"
 
-const Header = ({location, gameData}) => {
+const Header = ({location}) => {
+    /*
     const path = location.pathname.substring(1)
     const gameIndex = gameData.findIndex(item => JSON.stringify(item.name) === JSON.stringify(path))
     useEffect(() => {console.log(gameData[gameIndex])}, [])
@@ -15,16 +16,12 @@ const Header = ({location, gameData}) => {
             console.log(gameIndex) 
         }
     }, [])
- 
+ */
     if ((location.pathname.includes("War") || location.pathname.includes("Medieval") || location.pathname.includes("Sports"))) {
         return (
             <div className="header-true">
                 <ul>
-                {characters.map(item => {
-                    return (
-                    <li key={item.character}><img src={item.image}></img></li>
-                    )
-                })}
+
                 </ul>
                 <span>Timer:</span>
                     <Link to="/"><img id="header-true-icon" src={HomeIcon} alt="Home Icon"></img></Link>
