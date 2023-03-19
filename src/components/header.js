@@ -7,6 +7,7 @@ import { getDocs, collection, query, where } from 'firebase/firestore'
 const Header = ({location}) => {
     const [ characters, setCharacters ] = useState([])
     const path = location.pathname.substring(6)
+
     const getQuery = async () => {
         const q = query(collection(db, "levels"), where('name', '==', `${path}`))
         const querySnapshot = await getDocs(q);
@@ -14,10 +15,12 @@ const Header = ({location}) => {
           setCharacters(characters => [...characters, doc.data()])
         }); 
       };
+
       useEffect(() => {
+        setCharacters([])
         getQuery();
-    }, []) 
- 
+    }, [path])
+
     if (location.pathname.includes('game')) {
         return (
             <div className="header-true">
