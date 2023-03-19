@@ -1,15 +1,28 @@
-import React from "react"
-import { Link } from "react-router-dom"
+import React, { useEffect, useState } from "react"
+import { Link, useParams } from "react-router-dom"
 import { Icon, HomeIcon } from "../assets"
 
-const Header = ({location, listOfCharacters}) => {
-    if (location.pathname.includes('game')) {
+const Header = ({location, gameData}) => {
+    const path = location.pathname.substring(1)
+    const gameIndex = gameData.findIndex(item => JSON.stringify(item.name) === JSON.stringify(path))
+    useEffect(() => {console.log(gameData[gameIndex])}, [])
+    const myGame = gameData[gameIndex]
+    const [ characters, setCharacters ] = useState([])
+
+    useEffect(() => {
+        if (location.pathname.includes('War')) { 
+            setCharacters(myGame.characters)
+            console.log(gameIndex) 
+        }
+    }, [])
+ 
+    if ((location.pathname.includes("War") || location.pathname.includes("Medieval") || location.pathname.includes("Sports"))) {
         return (
             <div className="header-true">
                 <ul>
-                {listOfCharacters.map(character => {
+                {characters.map(item => {
                     return (
-                        <li key={character}><img src={character} alt="Waldo character"></img></li>
+                    <li key={item.character}><img src={item.image}></img></li>
                     )
                 })}
                 </ul>

@@ -1,6 +1,5 @@
 import React from "react"
 import { Link } from "react-router-dom"
-import Scoreboard from "./scoreboard"
 
 const Home = ({gameData}) => {
     return (
@@ -14,12 +13,12 @@ const Home = ({gameData}) => {
                     return (
                         <div key={item.name} className="home-level">
                             <div className="home-level-images">
-                                <Link to={`/${item.name}`}>
+                                <Link to={`./${item.name}`}>
                                     <img className="home-level-image" src={item.url} alt="Pictures of characters"></img>
                                 </Link>
                             </div>
                             <div className="home-level-text">
-                                <Link to={`/${item.name}`}>
+                                <Link to={`./${item.name}`}>
                                     {item.name}
                                 </Link>
                             </div>

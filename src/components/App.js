@@ -35,7 +35,7 @@ const App = () => {
       <Header location={location} gameData={gameData} listOfCharacters={listOfCharacters} />
       <Routes>
         <Route path="/" exact element={<Home gameData={gameData} />} />
-        <Route path="/game" element={<Game setGameOver={setGameOver} listOfCharacters={listOfCharacters} box={box} setBox={setBox} />} />
+        <Route path="/:id" element={<Game gameData={gameData} setGameOver={setGameOver} listOfCharacters={listOfCharacters} box={box} setBox={setBox} />} />
         <Route path="/scoreboard" element={<Scoreboard/>} />
       </Routes>
       </div>

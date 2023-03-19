@@ -1,8 +1,12 @@
 import Characters from "./characters"
 import { PictureOne, PictureTwo, PictureThree } from "../assets"
-import React from "react"
+import React, { useEffect } from "react"
+import { useParams } from "react-router-dom";
 
-const Game = ({setGameOver, listOfCharacters, setBox, box}) => {
+const Game = ({setGameOver, gameData, listOfCharacters, setBox, box}) => {
+    const  matchId  = useParams()
+
+    const myGame = gameData.find(item => item.name === matchId.id) 
 
     const pushToArray = (e) => {
         if (e.target.id === 'photo-image-search') {
@@ -15,17 +19,17 @@ const Game = ({setGameOver, listOfCharacters, setBox, box}) => {
         setBox([])
         }
     }
-
     return (
-        <div className="photo" onClick={pushToArray}>
+            <div className="photo" onClick={pushToArray}>
             {box.map(item => {
                 return (
                 <div key={item} className="characters" style={{ left: item.left, top: item.top }}><Characters listOfCharacters={listOfCharacters}/></div>
                 )
             })}
             <div className="photo-div">
-                <img id="photo-image-search" src={PictureThree} alt="Find Waldo"></img>
+                <img id="photo-image-search" src={myGame.url} alt="Find Waldo"></img>
             </div>
+
         </div>
     )
 }
