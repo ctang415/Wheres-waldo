@@ -1,14 +1,18 @@
 import React from "react"
 
-const Characters = ({listOfCharacters, setBox, box}) => {
+const Characters = ({ gameData, setBox, box }) => {
     return (
         <div className="characters">
-        {listOfCharacters.map(item => {
+        {gameData.map(item => {
             return (
-                <div className="characters-div" key={item}>
-                    <img className="characters-image" src={item}></img>
+                item.characters.map((person) => {
+                    return (
+                <div className="characters-div" key={person.character}>
+                    <img className="characters-image" src={person.image}></img>
                 </div>
-            )
+                    )
+                })
+            ) 
         })}
         </div>
     )

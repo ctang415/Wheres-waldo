@@ -25,9 +25,7 @@ const App = () => {
   console.log(doc.id, " => ", doc.data());
 });
   }
-  const {id} = useParams()
   useEffect(() => {getQuery()}, [])
-  useEffect(() => {console.log(gameData)}, [])
 
   return (
     <div className="page">

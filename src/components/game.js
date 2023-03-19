@@ -17,8 +17,8 @@ const Game = ({setGameOver, listOfCharacters, setBox, box}) => {
         }); 
       };
       useEffect(() => {
-        getQuery(); console.log(gameData)
-    }, [])  
+        getQuery(); console.log(gameData) 
+    }, [])   
 
     const pushToArray = (e) => {
         if (e.target.id === 'photo-image-search') {
@@ -35,12 +35,13 @@ const Game = ({setGameOver, listOfCharacters, setBox, box}) => {
             <div className="photo" onClick={pushToArray}>
             {box.map(item => {
                 return (
-                <div key={item} className="characters" style={{ left: item.left, top: item.top }}><Characters listOfCharacters={listOfCharacters}/></div>
+                <div key={item} className="characters" style={{ left: item.left, top: item.top }}><Characters gameData={gameData} listOfCharacters={listOfCharacters}/></div>
                 )
             })}
             {gameData.map(item => {
                 return (
             <div key={item.name} className="photo-div">
+                
                 <img id="photo-image-search" src={item.url} alt="Find Waldo"></img>
             </div>
                 )
