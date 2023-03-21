@@ -5,11 +5,11 @@ import { db } from "../firebase-config";
 import { getDocs, collection, query, where } from 'firebase/firestore'
 import Modal from "./Modal";
 
-const Game = ({gameOver, setGameOver, setBox, box}) => {
+const Game = ({setBox, box}) => {
     const matchId  = useParams()
     const [ gameData, setGameData ] = useState([])
     const [ charactersFound, setCharactersFound ] = useState([])
-    const [ modal, setModal ] = useState(false)
+    const [ gameOver, setGameOver] = useState(false)
 
     useEffect(() => {
     const getQuery = async () => {
@@ -48,7 +48,6 @@ const Game = ({gameOver, setGameOver, setBox, box}) => {
             if (targetX === charX && targetY === charY) {
                 setCharactersFound(charactersFound.map(item => ( JSON.stringify(item.name) === JSON.stringify(e.target.alt) ? {...item, found: true} : item )))
             }
-            checkIfAllFound()
             console.log(charactersFound)
             console.log(e.target.alt)
             console.log(gameOver)
@@ -60,20 +59,18 @@ const Game = ({gameOver, setGameOver, setBox, box}) => {
     }
 
     const checkIfAllFound = () => {
-        const check = charactersFound.every((prop) => prop.found === true)
-        console.log(check)
+        const check = charactersFound.every( (prop) => prop.found === true)
         if (check === true) {
             setGameOver(true)
         }
     }
 
     useEffect(() => {
-        if (gameOver === true) {
-            console.log('you win')
-            setModal(true)
+        if (charactersFound.length !== 0) {
+            checkIfAllFound()
         }
-    }, [gameOver])
-
+    }, [charactersFound])
+ 
     return (
         <div className="photo" onClick={pushToArray}>
             {box.map(item => {
@@ -81,7 +78,7 @@ const Game = ({gameOver, setGameOver, setBox, box}) => {
                     <div key={item} className="characters" style={{ left: item.left, top: item.top }}><Characters charactersFound={charactersFound} /></div>
                 )
             })}
-            <Modal setGameOver={setGameOver} charactersFound={charactersFound} setCharactersFound={setCharactersFound} setModal={setModal} modal={modal} />
+            <Modal gameOver={gameOver} setGameOver={setGameOver} charactersFound={charactersFound} setCharactersFound={setCharactersFound} />
             {gameData.map(item => {
                 return (
                     <div key={item.name} className="photo-div">

@@ -40,9 +40,13 @@ const Header = ({location}) => {
         )
     } else
     return (
-        <div className="header-false">
-            <h1 id="header-title-one">Where's</h1> <h1 id="header-title-two">Waldo?</h1>
-            <img id="header-icon" src={Icon} alt="Waldo's face"></img>
+        <div className="header">
+        <Link to="/">
+            <div className="header-false">
+                <h1 id="header-title-one">Where's</h1> <h1 id="header-title-two">Waldo?</h1>
+                <img id="header-icon" src={Icon} alt="Waldo's face"></img>
+            </div>
+        </Link>
         </div>
     )
 }

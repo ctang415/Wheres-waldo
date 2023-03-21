@@ -1,11 +1,11 @@
 import React from "react"
 
-const Scoreboard = () => {
+const Leaderboard = () => {
     return (
         <div>
-            Scoreboard
+            Leaderboard
         </div>
     )
 }
 
-export default Scoreboard
+export default Leaderboard

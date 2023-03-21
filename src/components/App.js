@@ -4,14 +4,13 @@ import { Routes, Route, useLocation } from 'react-router';
 import Game from './Game';
 import Header from './Header';
 import Home from './Home';
-import Scoreboard from './Scoreboard';
+import Leaderboard from './Leaderboard';
 import { db } from '../firebase-config';
 
 const App = () => {
   const location = useLocation();
   const [ box, setBox ] = useState([])
   const [ gameData, setGameData] = useState([])
-  const [ gameOver, setGameOver] = useState(false)
 
   useEffect( () => {
     const getQuery = async () => {
@@ -31,8 +30,8 @@ const App = () => {
       <Header location={location} gameData={gameData} />
       <Routes>
         <Route path="/" exact element={<Home gameData={gameData} />} />
-        <Route path="/game/:id" element={<Game setGameOver={setGameOver} gameOver={gameOver} box={box} setBox={setBox} />} />
-        <Route path="/scoreboard" element={<Scoreboard/>} />
+        <Route path="/game/:id" element={<Game box={box} setBox={setBox} />} />
+        <Route path="/leaderboard" element={<Leaderboard/>} />
       </Routes>
       </div>
     </div>

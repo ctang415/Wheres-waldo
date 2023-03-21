@@ -45,14 +45,20 @@ body {
     cursor: pointer;
 }
 
+.header {
+    display: flex;
+    justify-content: center;
+    background-color: antiquewhite;
+    
+}
+
 .header-false {
     display: flex;
-    background-color: antiquewhite;
     height: 15vh;
-    justify-content: center;
     align-items: center;
     gap: 2vh;
 }
+
 #header-icon {
     height: 65%;
 }
@@ -164,6 +170,7 @@ a:-webkit-any-link {
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+
 }
 
 .modaltext {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React from "react"
 
 const Characters = ({ charactersFound }) => {
     return (
@@ -6,7 +6,7 @@ const Characters = ({ charactersFound }) => {
                 {charactersFound.map((person) => {
                     return (
                 <div className="characters-div" key={person.name}>
-                    <img className={'characters-image'} src={person.image} alt={person.name}></img>
+                    <img className={ person.found ? 'characters-image-true' : 'characters-image' } src={person.image} alt={person.name}></img>
                 </div>
                     )
                 })

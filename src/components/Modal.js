@@ -1,12 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router";
 
-const Modal = ({modal, setModal, setGameOver, charactersFound, setCharactersFound }) => {
+
+const Modal = ({ gameOver, setGameOver, charactersFound, setCharactersFound }) => {
+    const navigate = useNavigate()
     const resetLevel = () => {
-        setModal(false)
         setCharactersFound(charactersFound.map(person => person.name ? {...person, found: false} : person ))
         setGameOver(false)
+        document.body.style.overflow = "scroll"
+        navigate('/leaderboard')
     }
-    if (modal) {
+
+    useEffect(() => {
+        if (gameOver) {
+        document.body.style.overflow = "hidden";
+        } 
+    });
+
+    if (gameOver) {
     return (
         <div className="modal">
             <div className="modaltext">
