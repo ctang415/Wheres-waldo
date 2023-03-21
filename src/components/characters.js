@@ -1,19 +1,16 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 
-const Characters = ({ gameData, setBox, box }) => {
+const Characters = ({ charactersFound }) => {
     return (
         <div className="characters">
-        {gameData.map(item => {
-            return (
-                item.characters.map((person) => {
+                {charactersFound.map((person) => {
                     return (
-                <div className="characters-div" key={person.character}>
-                    <img className="characters-image" src={person.image} alt="Waldo character"></img>
+                <div className="characters-div" key={person.name}>
+                    <img className={'characters-image'} src={person.image} alt={person.name}></img>
                 </div>
                     )
                 })
-            ) 
-        })}
+            }
         </div>
     )
 }

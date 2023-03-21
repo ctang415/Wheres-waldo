@@ -7,16 +7,15 @@ import { getDocs, collection, query, where } from 'firebase/firestore'
 const Header = ({location}) => {
     const [ characters, setCharacters ] = useState([])
     const path = location.pathname.substring(6)
-
-    const getQuery = async () => {
+      
+    useEffect(() => {
+        const getQuery = async () => {
         const q = query(collection(db, "levels"), where('name', '==', `${path}`))
         const querySnapshot = await getDocs(q);
         querySnapshot.forEach((doc) => {
-          setCharacters(characters => [...characters, doc.data()])
+            setCharacters(characters => [...characters, doc.data()])
         }); 
-      };
-
-      useEffect(() => {
+        };
         setCharacters([])
         getQuery();
     }, [path])
