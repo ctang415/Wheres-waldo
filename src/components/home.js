@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "react-router-dom"
 
-const Home = ({gameData}) => {
+const Home = ({ gameData }) => {
     return (
         <div className="home">
             <div className="home-text"> 
@@ -27,7 +27,9 @@ const Home = ({gameData}) => {
                 })}
             </div>
             <div className="buttons">
-                    <Link to="/leaderboard"><button className="button">Leaderboard</button></Link>
+                    <Link to="/leaderboard">
+                        <button className="button">Leaderboard</button>
+                    </Link>
             </div>
         </div>
     )

@@ -4,8 +4,10 @@ import { useParams } from "react-router-dom";
 import { db } from "../firebase-config";
 import { getDocs, collection, query, where } from 'firebase/firestore'
 import Modal from "./Modal";
+import setOfCoordinatesX from "../functions/coordinatesX";
+import setOfCoordinatesY from "../functions/coordinatesY";
 
-const Game = ({setBox, box}) => {
+const Game = ({ setBox, box }) => {
     const matchId  = useParams()
     const [ gameData, setGameData ] = useState([])
     const [ charactersFound, setCharactersFound ] = useState([])
@@ -13,11 +15,11 @@ const Game = ({setBox, box}) => {
 
     useEffect(() => {
     const getQuery = async () => {
-    const q = query(collection(db, "levels"), where('name', '==', `${matchId.id}`))
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-        setGameData(gameData => [...gameData, doc.data()])
-    });
+        const q = query(collection(db, "levels"), where('name', '==', `${matchId.id}`))
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+            setGameData(gameData => [...gameData, doc.data()])
+        });
     };
     getQuery();
     }, [setGameData])
@@ -36,8 +38,6 @@ const Game = ({setBox, box}) => {
                 y: Math.round((e.nativeEvent.offsetY/e.nativeEvent.target.offsetHeight) * 100)}
             }]
             )
-        console.log(Math.round((e.nativeEvent.offsetX/e.nativeEvent.target.offsetWidth) * 100))
-        console.log(Math.round((e.nativeEvent.offsetY/e.nativeEvent.target.offsetHeight) * 100))
         } 
         if (box.length !== 0 && e.target.className === "characters-image") {
             const index = gameData[0].characters.findIndex(item => JSON.stringify(item.character) === JSON.stringify(e.target.alt))
@@ -45,40 +45,45 @@ const Game = ({setBox, box}) => {
             const targetY = box[0].coordinates.y
             const charX = gameData[0].characters[index].coordinates.x
             const charY = gameData[0].characters[index].coordinates.y
-            if (targetX === charX && targetY === charY) {
+            if ( (setOfCoordinatesX(gameData.name, charX, targetX) === true) && (setOfCoordinatesY(gameData.name, charY, targetY) === true) ) {
                 setCharactersFound(charactersFound.map(item => ( JSON.stringify(item.name) === JSON.stringify(e.target.alt) ? {...item, found: true} : item )))
             }
-            console.log(charactersFound)
-            console.log(e.target.alt)
-            console.log(gameOver)
             setBox([])
         } 
-        if (box.length !== 0)  {
+        if (box.length !== 0) {
             setBox([])
-        }
-    }
-
-    const checkIfAllFound = () => {
-        const check = charactersFound.every( (prop) => prop.found === true)
-        if (check === true) {
-            setGameOver(true)
         }
     }
 
     useEffect(() => {
         if (charactersFound.length !== 0) {
+            const checkIfAllFound = () => {
+                const check = charactersFound.every( (prop) => prop.found === true)
+                if (check === true) {
+                    setGameOver(true)
+                }
+            }
             checkIfAllFound()
         }
     }, [charactersFound])
+
+    useEffect(() => {
+        if (gameOver) {
+            document.body.style.overflow = "hidden";
+        } 
+        return () => document.body.style.overflow = "unset"
+    }, [gameOver]);
  
     return (
         <div className="photo" onClick={pushToArray}>
             {box.map(item => {
                 return (
-                    <div key={item} className="characters" style={{ left: item.left, top: item.top }}><Characters charactersFound={charactersFound} /></div>
+                    <div key={item} className="characters" style={{ left: item.left, top: item.top }}>
+                        <Characters charactersFound={charactersFound} />
+                    </div>
                 )
             })}
-            <Modal gameOver={gameOver} setGameOver={setGameOver} charactersFound={charactersFound} setCharactersFound={setCharactersFound} />
+            <Modal gameOver={gameOver} />
             {gameData.map(item => {
                 return (
                     <div key={item.name} className="photo-div">

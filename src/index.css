@@ -74,11 +74,18 @@ ul {
 }
 
 li {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
     list-style: none;
 }
 
+li > span {
+    background-color: white;
+}
+
 li > img {
-    height: 10vh;
+    height: 9vh;
     width: auto;
 }
 
@@ -118,7 +125,7 @@ li > img {
 .characters-image-true {
     height: 100%;
     width: 100%;
-    opacity: 0.6;
+    opacity: 0.5;
 }
 
 #photo-image-search {

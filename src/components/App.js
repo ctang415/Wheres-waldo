@@ -12,7 +12,7 @@ const App = () => {
   const [ box, setBox ] = useState([])
   const [ gameData, setGameData] = useState([])
 
-  useEffect( () => {
+  useEffect(() => {
     const getQuery = async () => {
       const querySnapshot = await getDocs(collection(db, "levels"));
       querySnapshot.forEach((doc) => {
