@@ -1,4 +1,4 @@
-import { getDocs, collection,} from 'firebase/firestore'
+import { setDoc, doc, getDocs, collection } from 'firebase/firestore'
 import React, { useEffect, useState } from 'react';
 import { Routes, Route, useLocation } from 'react-router';
 import Game from './Game';
@@ -9,7 +9,6 @@ import { db } from '../firebase-config';
 
 const App = () => {
   const location = useLocation();
-  const [ box, setBox ] = useState([])
   const [ gameData, setGameData] = useState([])
 
   useEffect(() => {
@@ -18,10 +17,25 @@ const App = () => {
       querySnapshot.forEach((doc) => {
         const data = doc.data()
         setGameData(gameData => [...gameData, data])
-        console.log(doc.id, " => ", doc.data());
       });
     }
     getQuery()
+  }, [])
+
+  useEffect( () => {
+    const addToCollection = async () => {
+    await setDoc(doc(db, "scores", "War"), {
+      exists: true
+    })
+      await setDoc(doc(db, "scores", "Medieval"), {
+        exists: true
+    })
+    await setDoc(doc(db, "scores", "Sports"), {
+      exists: true
+    })
+}
+
+  console.log('data sent')
   }, [])
 
   return (
@@ -30,8 +44,8 @@ const App = () => {
       <Header location={location} gameData={gameData} />
       <Routes>
         <Route path="/" exact element={<Home gameData={gameData} />} />
-        <Route path="/game/:id" element={<Game box={box} setBox={setBox} />} />
-        <Route path="/leaderboard" element={<Leaderboard/>} />
+        <Route path="/game/:id" element={<Game />} />
+        <Route path="/leaderboard" element={<Leaderboard gameData={gameData} />} />
       </Routes>
       </div>
     </div>

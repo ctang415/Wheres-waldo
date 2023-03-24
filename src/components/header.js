@@ -4,7 +4,7 @@ import { Icon, HomeIcon } from "../assets"
 import { db } from '../firebase-config';
 import { getDocs, collection, query, where } from 'firebase/firestore'
 
-const Header = ({location}) => {
+const Header = ({ location }) => {
     const [ characters, setCharacters ] = useState([])
     const path = location.pathname.substring(6)
       
@@ -23,7 +23,8 @@ const Header = ({location}) => {
     if (location.pathname.includes('game')) {
         return (
             <div className="header-true">
-                <ul>
+                <ul>         
+                    <span> Find me! </span>
                     {characters.map(item => {
                         return (
                             item.characters.map(person => {
@@ -37,7 +38,6 @@ const Header = ({location}) => {
                         )
                     })}
                 </ul>
-                <span>Timer:</span>
                     <Link to="/">
                         <img id="header-true-icon" src={HomeIcon} alt="Home Icon"></img>
                     </Link>

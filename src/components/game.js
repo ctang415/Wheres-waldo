@@ -7,11 +7,21 @@ import Modal from "./Modal";
 import setOfCoordinatesX from "../functions/coordinatesX";
 import setOfCoordinatesY from "../functions/coordinatesY";
 
-const Game = ({ setBox, box }) => {
+const Game = () => {
     const matchId  = useParams()
+    const [ box, setBox ] = useState([])
     const [ gameData, setGameData ] = useState([])
     const [ charactersFound, setCharactersFound ] = useState([])
     const [ gameOver, setGameOver] = useState(false)
+    const [ timer, setTimer ] = useState(0)
+
+    useEffect(() => {
+        if (gameOver === false) {
+            const interval = setInterval(() => setTimer(timer => timer + 1), 1000)
+
+            return () => clearInterval(interval)
+        }
+    }, [gameOver])
 
     useEffect(() => {
     const getQuery = async () => {
@@ -28,7 +38,7 @@ const Game = ({ setBox, box }) => {
         if (gameData.length !== 0) {
             gameData[0].characters.map(item => setCharactersFound(prev => [...prev, {name: item.character, image: item.image, found: false}]))
         }
-    }, [gameData]) 
+    }, [gameData])
 
     const pushToArray = (e) => {
         if (e.target.id === 'photo-image-search') {
@@ -83,7 +93,7 @@ const Game = ({ setBox, box }) => {
                     </div>
                 )
             })}
-            <Modal gameOver={gameOver} />
+            <Modal matchId={matchId} timer={timer} gameOver={gameOver} />
             {gameData.map(item => {
                 return (
                     <div key={item.name} className="photo-div">

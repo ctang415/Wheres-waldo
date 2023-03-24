@@ -28,7 +28,7 @@ const Home = ({ gameData }) => {
             </div>
             <div className="buttons">
                     <Link to="/leaderboard">
-                        <button className="button">Leaderboard</button>
+                        <button className="leader-button">Leaderboard</button>
                     </Link>
             </div>
         </div>

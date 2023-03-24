@@ -26,9 +26,19 @@ body {
     white-space: pre-line;
 }
 
-.button {
-    padding: 1.5vh;
-    width: 25vh;
+.buttons {
+    padding-top: 3vh;
+}
+
+.leader-button {
+    padding: 2vh;
+    width: 45vh;
+    font-size: 0.7em;   
+}
+
+.submit-button {
+    padding: 1vh;
+    width: 20vh;
     font-size: 0.7em;   
 }
 
@@ -39,6 +49,7 @@ body {
     justify-content: space-evenly;
     align-items: center;
     gap: 2vh;
+    font-size: 3.3vh;
 }
 
 #header-true-icon {
@@ -49,7 +60,6 @@ body {
     display: flex;
     justify-content: center;
     background-color: antiquewhite;
-    
 }
 
 .header-false {
@@ -71,6 +81,8 @@ body {
 ul {
     display: flex;
     flex-direction: row;
+    align-items: center;
+    gap: 2.5vh;
 }
 
 li {
@@ -167,7 +179,7 @@ a:-webkit-any-link {
     cursor: pointer;
   }
 
-  .modal {  
+.modal {  
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
     left: 0;
@@ -177,10 +189,9 @@ a:-webkit-any-link {
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-
 }
 
-.modaltext {
+.modal-text {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -192,5 +203,105 @@ a:-webkit-any-link {
     padding: 20px;
     width: 60%; /* Could be more or less, depending on screen size */
     font-size: 4vh;
-    gap: 1vh;
+    gap: 1.5vh;
+    text-align: center;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 2.5vh;
+}
+
+#modal-timer {
+    color:red;
+}
+
+.leader {
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,.2)), url('./assets/example.jpg');
+    background-size: cover;
+    background-repeat:no-repeat; 
+    height: 100vh;
+    align-items: center;
+}
+
+.leader-top-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    gap: 8vh;
+}
+
+.leader-text {
+    font-size: 3em;
+    padding-top: 3vh;
+    font-weight: bold;
+    text-align: center;
+    white-space: pre-line;
+}
+
+.leader-levels {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    gap: 10vh;
+    font-size: 1.5em;
+}
+
+.leader-level {
+    display: flex;
+    flex-direction: column;
+}
+
+.leader-level-images {
+    flex: 1 1 auto; 
+    width: 100%;
+}
+
+.leader-level-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.leader-level-text {
+    color: black;
+    background-color: white;
+}
+
+.leader-data {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 100%;
+}
+
+.leader-data-record {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+    background-color: antiquewhite;
+}
+
+.leader-data-record > span {
+    font-size: 1.5em;
+    padding: 1vh;
+}
+
+input {
+    padding: 1.7vh;
+}
+
+.column-one {
+    grid-column: 1;
+}
+
+.column-two {
+    grid-column: 2;
+}
+
+.column-three {
+    grid-column: 3;
 }
