@@ -1,4 +1,4 @@
-import { doc, getDoc } from "@firebase/firestore"
+import { collection, doc, getDocs, getDoc, orderBy, query, limit, where, documentId } from "@firebase/firestore"
 import React, { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { db } from "../firebase-config"
@@ -6,27 +6,38 @@ import Data from "./Data"
 
 const Leaderboard = ( {gameData} ) => {
     const [ scores, setScores ] = useState([])
+    const [ data, setData ] = useState([])
 /*
     useEffect(() => {
-        const getQuery = async () => {
-        const ref = doc(db, 'scores', matchId.id)
-        const querySnapshot = await getDocs(ref);
-          querySnapshot.forEach((doc) => {
-            const data = doc.data()
-            setScores(scores => [...scores, data])
-            console.log(doc.id, " => ", doc.data());
-          });
+        const getQuery = async (e) => {
+            const ref = doc(db, 'scores', e.target.id)
+            const querySnapshot = await getDoc(ref);
+                const data = querySnapshot.data()
+                setScores(data)
         }
+        getQuery()
       }, [])
 */
 
       const handleClick = async (e) => {
         const ref = doc(db, 'scores', e.target.id)
-        const querySnapshot = await getDoc(ref);
+        const querySnapshot = await getDoc(ref)
             const data = querySnapshot.data()
-            setScores(data)
-            console.log('sent')
-}
+            setData(data)
+            let newArray = Object.values(data).map(item => item.sort( (a, b ) => parseInt(a.data.time) - parseInt(b.data.time)))
+            console.log(newArray)
+            setScores(newArray)
+      }
+/*
+      const handleClick = async (e) => {
+        const ref = collection(db, 'scores')
+        const q = query(ref, where('name', "==", e.target.id), orderBy('time'))
+        const querySnapshot = await getDoc(q)
+        const data = querySnapshot.data()
+        setScores(data)
+        console.log(data)
+      }
+      */
 
     return (
         <div className="leader">

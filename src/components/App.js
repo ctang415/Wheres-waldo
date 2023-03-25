@@ -25,16 +25,15 @@ const App = () => {
   useEffect( () => {
     const addToCollection = async () => {
     await setDoc(doc(db, "scores", "War"), {
-      exists: true
+      name: "War"
     })
       await setDoc(doc(db, "scores", "Medieval"), {
-        exists: true
+      name: "Medieval"
     })
     await setDoc(doc(db, "scores", "Sports"), {
-      exists: true
+      name: "Sports"
     })
 }
-
   console.log('data sent')
   }, [])
 
