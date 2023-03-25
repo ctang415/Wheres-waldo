@@ -6,7 +6,7 @@ import Data from "./Data"
 
 const Leaderboard = ( { gameData } ) => {
     const [ scores, setScores ] = useState([])
-    const [ data, setData ] = useState([])
+    const [ sortData, setSortData ] = useState([])
     const location = useLocation()
     const from  = location.state
 
@@ -17,7 +17,7 @@ const Leaderboard = ( { gameData } ) => {
                 const ref = doc(db, 'scores', prevPath)
                 const querySnapshot = await getDoc(ref);
                     const data = querySnapshot.data()
-                    setData(data)
+                    setSortData(data)
                     let newArray = Object.values(data).map(item => item.sort( (a, b ) => parseInt(a.data.time) - parseInt(b.data.time)))
                     console.log(newArray)
                     setScores(newArray)
@@ -28,24 +28,24 @@ const Leaderboard = ( { gameData } ) => {
                 const ref = doc(db, 'scores', "War")
                 const querySnapshot = await getDoc(ref);
                 const data = querySnapshot.data()
-                setData(data)
+                setSortData(data)
                 let newArray = Object.values(data).map(item => item.sort( (a, b ) => parseInt(a.data.time) - parseInt(b.data.time)))
                 console.log(newArray)
                 setScores(newArray)
             }
             getQuery()
-    }
-      }, [])
+        }
+    }, [setSortData])
 
-      const handleClick = async (e) => {
+    const handleClick = async (e) => {
         const ref = doc(db, 'scores', e.target.id)
         const querySnapshot = await getDoc(ref)
             const data = querySnapshot.data()
-            setData(data)
+            setSortData(data)
             let newArray = Object.values(data).map(item => item.sort( (a, b ) => parseInt(a.data.time) - parseInt(b.data.time)))
             console.log(newArray)
             setScores(newArray)
-      }
+    }
 
     return (
         <div className="leader">
@@ -62,7 +62,7 @@ const Leaderboard = ( { gameData } ) => {
                             </div>
                             <Link to={`../game/${item.name}`}>
                             <div className="leader-level-text">
-                                    {item.name}
+                                {item.name}
                             </div>
                             </Link>
                         </div>

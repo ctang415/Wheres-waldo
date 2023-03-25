@@ -111,6 +111,10 @@ li > img {
     -webkit-text-stroke: 2px rgb(0, 0, 0);
 }
 
+.home-level:hover, .leader-level:hover {
+    box-shadow: 2px 8px 16px 0 rgba(0, 0, 0, 0.5);
+}
+
 .page {
     display: flex;
     min-height: 100vh;
@@ -269,6 +273,9 @@ a:-webkit-any-link {
 .leader-level-text {
     color: black;
     background-color: white;
+    display: flex;
+    justify-content: center;
+    gap: 2vh;
 }
 
 .leader-data {
@@ -276,6 +283,8 @@ a:-webkit-any-link {
     flex-direction: column;
     text-align: center;
     width: 100%;
+    height: 45vh;
+    overflow-y: auto;
 }
 
 .leader-data-record {
@@ -283,6 +292,7 @@ a:-webkit-any-link {
     grid-template-columns: repeat(3, 1fr);
     width: 100%;
     background-color: antiquewhite;
+    border: solid 0.1vh black;
 }
 
 .leader-data-record > span {
