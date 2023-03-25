@@ -1,23 +1,41 @@
-import { collection, doc, getDocs, getDoc, orderBy, query, limit, where, documentId } from "@firebase/firestore"
+import { doc, getDoc} from "@firebase/firestore"
 import React, { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 import { db } from "../firebase-config"
 import Data from "./Data"
 
-const Leaderboard = ( {gameData} ) => {
+const Leaderboard = ( { gameData } ) => {
     const [ scores, setScores ] = useState([])
     const [ data, setData ] = useState([])
-/*
+    const location = useLocation()
+    const from  = location.state
+
     useEffect(() => {
-        const getQuery = async (e) => {
-            const ref = doc(db, 'scores', e.target.id)
-            const querySnapshot = await getDoc(ref);
+        if (from !== null ) {
+            const prevPath = Object.values(from)[0].pathname.substring(6)
+            const getQuery = async (e) => {
+                const ref = doc(db, 'scores', prevPath)
+                const querySnapshot = await getDoc(ref);
+                    const data = querySnapshot.data()
+                    setData(data)
+                    let newArray = Object.values(data).map(item => item.sort( (a, b ) => parseInt(a.data.time) - parseInt(b.data.time)))
+                    console.log(newArray)
+                    setScores(newArray)
+            }
+            getQuery()
+        } else {
+            const getQuery = async (e) => {
+                const ref = doc(db, 'scores', "War")
+                const querySnapshot = await getDoc(ref);
                 const data = querySnapshot.data()
-                setScores(data)
-        }
-        getQuery()
+                setData(data)
+                let newArray = Object.values(data).map(item => item.sort( (a, b ) => parseInt(a.data.time) - parseInt(b.data.time)))
+                console.log(newArray)
+                setScores(newArray)
+            }
+            getQuery()
+    }
       }, [])
-*/
 
       const handleClick = async (e) => {
         const ref = doc(db, 'scores', e.target.id)
@@ -28,16 +46,6 @@ const Leaderboard = ( {gameData} ) => {
             console.log(newArray)
             setScores(newArray)
       }
-/*
-      const handleClick = async (e) => {
-        const ref = collection(db, 'scores')
-        const q = query(ref, where('name', "==", e.target.id), orderBy('time'))
-        const querySnapshot = await getDoc(q)
-        const data = querySnapshot.data()
-        setScores(data)
-        console.log(data)
-      }
-      */
 
     return (
         <div className="leader">
