@@ -2,10 +2,12 @@ import { arrayUnion, doc, updateDoc, } from "@firebase/firestore";
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { db } from "../firebase-config";
+const Filter = require('bad-words')
 
 const Modal = ({ gameOver, matchId, timer }) => {
     const [ data, setData ] = useState([])
     const pathName = useLocation();
+    const customFilter = new Filter({ placeHolder: 'x'});
 
     const getDate = () => {
     let today = new Date();
@@ -17,9 +19,10 @@ const Modal = ({ gameOver, matchId, timer }) => {
     }
     
     const submitHandler = async () => {
+        console.log(data)
+        setData(data)
         const ref = doc(db, 'scores', matchId.id)
         await updateDoc(ref, {data: arrayUnion( { data: data})})
-        console.log(data)
     }
 
     if (gameOver) {
@@ -28,7 +31,7 @@ const Modal = ({ gameOver, matchId, timer }) => {
                 <div className="modal-text">
                     <span>You finished in <span id="modal-timer">{timer}</span> second(s)!</span>
                     <span>Enter your name to be put on the leaderboard:</span>
-                    <input type='text' onChange={(e) => setData({name: e.target.value, time: timer, date: getDate() })}></input>
+                    <input type='text' maxLength="10" onChange={(e) => setData({name: customFilter.clean(e.target.value), time: timer, date: getDate() })}></input>
                     <div className="modal-buttons">
                         <Link to="/leaderboard" state={{ from: pathName }}>
                             <div>

@@ -11,7 +11,7 @@ const Data = ({ scores }) => {
                             return (
                                 <div className="leader-data-record" key={x.name}>
                                     <span className="column-one">{x.name}</span>
-                                    <span className="column-two">{x.time}</span>
+                                    <span className="column-two">{x.time} sec</span>
                                     <span className="column-three">{x.date}</span>
                                 </div>
                             )
