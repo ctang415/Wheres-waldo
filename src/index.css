@@ -20,6 +20,21 @@ body {
     justify-content: space-evenly;
 }
 
+.error-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 2em;
+    background: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,.2)), url('./assets/example.jpg');
+    background-size: cover;
+    background-repeat:no-repeat; 
+    height: 100vh;
+}
+
+.error-page > h2 {
+    margin: 5% auto;
+}
+
 .home-text {
     font-weight: bold;
     text-align: center;
@@ -66,15 +81,22 @@ body {
     display: flex;
     height: 15vh;
     align-items: center;
-    gap: 2vh;
+    gap: 4vh;
 }
 
 #header-icon {
     height: 65%;
 }
 
-.header-false > h1 {
-    font-size: 10vh;
+#header-icon:hover, .header-titles:hover, #header-true-icon:hover {
+    transform: scale(1.1);
+}
+
+.header-titles {
+    display: flex;
+    flex-direction: row;
+    font-size: 5vh;
+    gap: 2vh;
     text-align: center;
 }
 
@@ -114,6 +136,8 @@ li > img {
 .home-level:hover, .leader-level:hover {
     box-shadow: 2px 8px 16px 0 rgba(0, 0, 0, 0.5);
 }
+
+
 
 .page {
     display: flex;

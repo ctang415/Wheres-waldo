@@ -6,6 +6,7 @@ import Header from './Header';
 import Home from './Home';
 import Leaderboard from './Leaderboard';
 import { db } from '../firebase-config';
+import NotFound from './NotFound';
 
 const App = () => {
   const location = useLocation();
@@ -45,6 +46,7 @@ const App = () => {
         <Route path="/" exact element={<Home gameData={gameData} />} />
         <Route path="/game/:id" element={<Game />} />
         <Route path="/leaderboard" element={<Leaderboard gameData={gameData} />} />
+        <Route path="*" element={<NotFound/>}/>
       </Routes>
       </div>
     </div>

@@ -42,11 +42,11 @@ const Game = () => {
 
     const pushToArray = (e) => {
         if (e.target.id === 'photo-image-search') {
-        setBox(box => 
-            [{
-                left: e.pageX, top: e.pageY, coordinates: {x: Math.round((e.nativeEvent.offsetX/e.nativeEvent.target.offsetWidth) * 100), 
-                y: Math.round((e.nativeEvent.offsetY/e.nativeEvent.target.offsetHeight) * 100)}
-            }]
+            setBox(box => 
+                [{
+                    left: e.pageX, top: e.pageY, coordinates: {x: Math.round((e.nativeEvent.offsetX/e.nativeEvent.target.offsetWidth) * 100), 
+                    y: Math.round((e.nativeEvent.offsetY/e.nativeEvent.target.offsetHeight) * 100)}
+                }]
             )
         } 
         if (box.length !== 0 && e.target.className === "characters-image") {

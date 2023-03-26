@@ -20,11 +20,11 @@ const Header = ({ location }) => {
         getQuery();
     }, [path])
 
-    if (location.pathname.includes('game')) {
-        return (
-            <div className="header-true">
-                <ul>         
-                    <span> Find me! </span>
+if (location.pathname.includes('game')) {
+    return (
+        <div className="header-true">
+            <ul>         
+                <span> Find me! </span>
                     {characters.map(item => {
                         return (
                             item.characters.map(person => {
@@ -48,8 +48,10 @@ const Header = ({ location }) => {
             <div className="header">
                 <Link to="/">
                     <div className="header-false">
-                        <h1 id="header-title-one">Where's</h1> 
-                        <h1 id="header-title-two">Waldo?</h1>
+                        <div className="header-titles">
+                            <h1 id="header-title-one">Where's</h1> 
+                            <h1 id="header-title-two">Waldo?</h1>
+                        </div>
                         <img id="header-icon" src={Icon} alt="Waldo's face"></img>
                     </div>
                 </Link>

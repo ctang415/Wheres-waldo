@@ -4,11 +4,13 @@ import { Link, useLocation } from "react-router-dom"
 import { db } from "../firebase-config"
 import Data from "./Data"
 
+
 const Leaderboard = ( { gameData } ) => {
     const [ scores, setScores ] = useState([])
     const [ sortData, setSortData ] = useState([])
     const location = useLocation()
     const from  = location.state
+ 
 
     useEffect(() => {
         if (from !== null ) {
