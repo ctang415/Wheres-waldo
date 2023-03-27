@@ -17,7 +17,7 @@ const Game = () => {
 
     useEffect(() => {
         if (gameOver === false) {
-            const interval = setInterval(() => setTimer(timer => timer + 1), 1000)
+            const interval = setInterval(() => setTimer(timer => (parseFloat(timer) + 0.01).toFixed(2)), 10)
 
             return () => clearInterval(interval)
         }

@@ -31,7 +31,7 @@ const Modal = ({ gameOver, matchId, timer }) => {
                 <div className="modal-text">
                     <span>You finished in <span id="modal-timer">{timer}</span> second(s)!</span>
                     <span>Enter your name to be put on the leaderboard:</span>
-                    <input type='text' maxLength="10" onChange={(e) => setData({name: customFilter.clean(e.target.value), time: timer, date: getDate() })}></input>
+                    <input type='text' maxLength="10" onChange={(e) => setData({name: e.target.value, time: timer, date: getDate() })}></input>
                     <div className="modal-buttons">
                         <Link to="/leaderboard" state={{ from: pathName }}>
                             <div>
