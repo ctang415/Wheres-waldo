@@ -1,4 +1,4 @@
-import { doc, getDoc} from "@firebase/firestore"
+import { doc, getDoc, updateDoc} from "@firebase/firestore"
 import React, { useEffect, useState } from "react"
 import { Link, useLocation } from "react-router-dom"
 import { db } from "../firebase-config"
@@ -13,14 +13,20 @@ const Leaderboard = ( { gameData } ) => {
     let customFilter = new Filter({ placeHolder: '*'});
 
     useEffect(() => {
-        if (from !== null ) {
+        if ( from !== null ) {
             const prevPath = Object.values(from)[0].pathname.substring(6)
             const getQuery = async (e) => {
                 const ref = doc(db, 'scores', prevPath)
                 const querySnapshot = await getDoc(ref);
                     const data = querySnapshot.data()
+                    Object.values(data).map(item => {
+                        item.forEach(element => { return element.data.name = customFilter.clean(element.data.name) }
+                        )
+                    }
+                    )
+                    await updateDoc(ref, {data})
                     setSortData(data)
-                    let newArray = Object.values(data).map(item => item.sort( (a, b ) => parseInt(a.data.time) - parseInt(b.data.time)))
+                    let newArray = Object.values(data).map(item => item.sort( (a, b ) => parseFloat(a.data.time) - parseFloat(b.data.time)))
                     console.log(newArray)
                     setScores(newArray)
             }
@@ -31,8 +37,7 @@ const Leaderboard = ( { gameData } ) => {
                 const querySnapshot = await getDoc(ref);
                 const data = querySnapshot.data()
                 setSortData(data)
-                let newArray = Object.values(data).map(item => item.sort( (a, b ) => parseInt(a.data.time) - parseInt(b.data.time)))
-                console.log(newArray)
+                let newArray = Object.values(data).map(item => item.sort( (a, b ) => parseFloat(a.data.time) - parseFloat(b.data.time)))
                 setScores(newArray)
             }
             getQuery()
@@ -43,9 +48,9 @@ const Leaderboard = ( { gameData } ) => {
         const ref = doc(db, 'scores', e.target.id)
         const querySnapshot = await getDoc(ref)
             const data = querySnapshot.data()
+            console.log(data)
             setSortData(data)
-            let newArray = Object.values(data).map(item => item.sort( (a, b ) => parseInt(a.data.time) - parseInt(b.data.time)))
-            console.log(newArray)
+            let newArray = Object.values(data).map(item => item.sort( (a, b ) => parseFloat(a.data.time) - parseFloat(b.data.time)))
             setScores(newArray)
     }
 
