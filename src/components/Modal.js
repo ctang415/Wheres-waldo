@@ -18,7 +18,7 @@ const Modal = ({ gameOver, matchId, timer }) => {
     
     const submitHandler = async (e) => {
         const ref = doc(db, 'scores', matchId.id)
-        await updateDoc(ref, {data: arrayUnion( { data: data})})
+        await updateDoc(ref, {data: arrayUnion( { data: data })})
     }
 
     if (gameOver) {
