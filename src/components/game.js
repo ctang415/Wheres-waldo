@@ -32,7 +32,7 @@ const Game = () => {
         });
     };
     getQuery();
-    }, [setGameData])
+    }, [matchId.id])
 
     useEffect(() => {
         if (gameData.length !== 0) {

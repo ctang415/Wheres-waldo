@@ -1,12 +1,13 @@
-import { setDoc, doc, getDocs, collection } from 'firebase/firestore'
+import { getDocs, collection } from 'firebase/firestore'
 import React, { useEffect, useState } from 'react';
 import { Routes, Route, useLocation } from 'react-router';
 import Game from './Game';
 import Header from './Header';
 import Home from './Home';
 import Leaderboard from './Leaderboard';
-import { db } from '../firebase-config';
+import { auth, db } from '../firebase-config';
 import NotFound from './NotFound';
+import { onAuthStateChanged, signInAnonymously } from '@firebase/auth';
 
 const App = () => {
   const location = useLocation();
@@ -23,19 +24,28 @@ const App = () => {
     getQuery()
   }, [])
 
-  useEffect( () => {
-    const addToCollection = async () => {
-    await setDoc(doc(db, "scores", "War"), {
-      name: "War"
+  useEffect(() => {
+    signInAnonymously(auth)
+    .then(() => {
+    // Signed in..
     })
-      await setDoc(doc(db, "scores", "Medieval"), {
-      name: "Medieval"
-    })
-    await setDoc(doc(db, "scores", "Sports"), {
-      name: "Sports"
-    })
-}
-  console.log('data sent')
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+    // ...
+    });
+    
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        const uid = user.uid;
+      // ...
+      } else {
+      // User is signed out
+      // ...
+      }
+    });
   }, [])
 
   return (
