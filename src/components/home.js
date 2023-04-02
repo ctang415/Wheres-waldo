@@ -5,7 +5,10 @@ const Home = ({ gameData }) => {
     return (
         <div className="home">
             <div className="home-text"> 
-                <div>How to Play: Find Waldo and his friends across 3 different images.</div>
+                <div>
+                    How to Play: Find Waldo and his friends by clicking and 
+                    matching the hidden character to their drop-down portrait.
+                </div>
                 <div>Try to get the fastest time to make it onto the leaderboard!</div>
             </div>
             <div className="home-levels">
