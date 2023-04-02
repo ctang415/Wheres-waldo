@@ -331,6 +331,16 @@ input {
     padding: 1.7vh;
 }
 
+.input-true {
+    border-radius: 0.6vh;
+    border-color: rgb(118, 118, 118);
+}
+
+.input-false {
+    border-radius: 0.6vh;
+    border-color: red;
+}
+
 .column-one {
     grid-column: 1;
 }
