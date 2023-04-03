@@ -2,11 +2,13 @@
     padding: 0;
     margin: 0;
     font-family: 'Gill Sans';
+    
 }
 
 body {
-    height: 100vh;
+    height: 100vh;   
 }
+
 
 .home {
     display: flex;
@@ -138,29 +140,21 @@ li > img {
     box-shadow: 2px 8px 16px 0 rgba(0, 0, 0, 0.5);
 }
 
-.page {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-}
-
-.photo {
-    
-}
 
 .content-wrapper {
     background: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,.2)), url('./assets/example.jpg');
     background-size: cover;
     background-repeat:no-repeat; 
-    flex: 1;
+    min-height: 100vh;
 }
 
 .characters {
     background-color: white;
     flex-direction: column;
-    z-index: 10;
     width: 5vw;
-    position: absolute;
+    position: fixed;
+    z-index: 10;
+    height: max-content;
 }
 
 .characters-image {
@@ -175,8 +169,7 @@ li > img {
 }
 
 #photo-image-search {
-    display: flex;
-    width: 100%;
+    width: 100vw;
 }
 
 .home-levels {
@@ -220,7 +213,6 @@ a:-webkit-any-link {
     top: 0;
     width: 100%; /* Full width */
     height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
@@ -508,9 +500,12 @@ input {
     .characters {
         background-color: white;
         flex-direction: column;
-        width: 6vh;
-        position: absolute;
+        width: 3vh;
+        position: fixed;
         z-index: 10;
+        height: auto;
+        top: 0;
+        align-self: flex-start;
     }
     
     .characters-image {
@@ -525,8 +520,7 @@ input {
     }
     
     #photo-image-search {
-        display: flex;
-        width: 100%;
+        width: 100vw;
     }
 
     .modal {  
@@ -536,7 +530,6 @@ input {
         top: 0;
         width: 100%; /* Full width */
         height: 100%; /* Full height */
-        overflow: auto; /* Enable scroll if needed */
         background-color: rgb(0,0,0); /* Fallback color */
         background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
     }

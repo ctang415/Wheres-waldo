@@ -2,7 +2,7 @@ import React from "react"
 
 const Characters = ({ charactersFound }) => {
     return (
-        <div className="characters">
+        <div className="characters-box">
                 {charactersFound.map((person) => {
                     return (
                         <div className="characters-div" key={person.name}>

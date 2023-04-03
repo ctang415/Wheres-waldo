@@ -50,8 +50,8 @@ const App = () => {
 
   return (
     <div className="page">
-      <div className="content-wrapper">
       <Header location={location} gameData={gameData} />
+      <div className="content-wrapper">
       <Routes>
         <Route path="/" exact element={<Home gameData={gameData} />} />
         <Route path="/game/:id" element={<Game />} />
