@@ -2,11 +2,10 @@
     padding: 0;
     margin: 0;
     font-family: 'Gill Sans';
-    
 }
 
 body {
-    height: 100vh;   
+    height: 100vh;
 }
 
 
@@ -140,6 +139,10 @@ li > img {
     box-shadow: 2px 8px 16px 0 rgba(0, 0, 0, 0.5);
 }
 
+.page {
+    position: relative;
+    overflow: hidden;
+}
 
 .content-wrapper {
     background: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,.2)), url('./assets/example.jpg');
@@ -150,11 +153,9 @@ li > img {
 
 .characters {
     background-color: white;
-    flex-direction: column;
     width: 5vw;
-    position: fixed;
+    position: absolute;
     z-index: 10;
-    height: max-content;
 }
 
 .characters-image {
@@ -200,7 +201,7 @@ li > img {
     background-color: white;
 }
 
-a:-webkit-any-link {
+a {
     text-decoration: none;
     color: black;
     cursor: pointer;
@@ -499,13 +500,9 @@ input {
 
     .characters {
         background-color: white;
-        flex-direction: column;
         width: 3vh;
-        position: fixed;
+        position: absolute;
         z-index: 10;
-        height: auto;
-        top: 0;
-        align-self: flex-start;
     }
     
     .characters-image {

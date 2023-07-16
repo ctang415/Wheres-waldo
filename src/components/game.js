@@ -93,7 +93,6 @@ const Game = () => {
                     </div>
                 )
             })}
-            <Modal matchId={matchId} timer={timer} gameOver={gameOver} />
             {gameData.map(item => {
                 return (
                     <div key={item.name} className="photo-div">
@@ -101,6 +100,7 @@ const Game = () => {
                     </div>
                 )
             })}
+            <Modal matchId={matchId} timer={timer} gameOver={gameOver} />
         </div>
     )
 }
